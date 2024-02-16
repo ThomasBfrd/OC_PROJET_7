@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@200;300;400;500;600;700;800&family=Roboto&display=swap');
+
+:root {
+    --black: #0f0f0f;
+    --selection: #FFD15B; 
+}
+
+a:focus {
+    outline: thin dotted 10px !important;
+}
+
+a:hover,
+a:active {
+    outline: 0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+    font-family: "Manrope", sans-serif;
+    width: 100dvw;
+    /* max-width: 1824px; */
+    margin: 0 auto;
+    background-color: #EDEDED;
+}
+
+/* Firefox (uncomment to work in Firefox, although other properties will not work!)  */
+/* .ingredients-list {
+  scrollbar-width: thin;
+  scrollbar-color: #A3A3A3 #FFFFFF;
+} */
+
+/* Chrome, Edge and Safari */
+.ingredients-list::-webkit-scrollbar {
+    height: 3px;
+    width: 2px;
+  }
+  .ingredients-list::-webkit-scrollbar-track {
+    border-radius: 6px;
+    background-color: #FFFFFF;
+  }
+  
+  .ingredients-list::-webkit-scrollbar-track:hover {
+    background-color: #FFFFFF;
+  }
+  
+  .ingredients-list::-webkit-scrollbar-track:active {
+    background-color: #B8C0C2;
+  }
+  
+  .ingredients-list::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #A3A3A3;
+  }
+  
+  .ingredients-list::-webkit-scrollbar-thumb:hover {
+    background-color: #ACACAC;
+  }
+  
+  .ingredients-list::-webkit-scrollbar-thumb:active {
+    background-color: #000000;
+  }
+

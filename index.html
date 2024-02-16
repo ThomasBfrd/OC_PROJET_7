@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Les Petits Plats, ..............">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/6143c6d1aa.js" crossorigin="anonymous"></script>
+  <title>Les Petits Plats</title>
+  <link rel="stylesheet" href="./css/index.css">
+  <script src="./index.js"></script>
+</head>
+
+<body>
+  <header role="" class="header" aria-label="haut de page pour Les Petits Plats">
+    <div class="logo">
+      <a href="#">
+        <img src="./assets/logo.png" alt="Logo Les Petits Plats">
+      </a>
+    </div>
+    <section class="header-content">
+      <h1 class="title">CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN,SIMPLES ET DÉLICIEUSES</h1>
+      <div class="searchbar">
+        <label for="search"></label>
+        <input type="text" id="search" placeholder="Rechercher une recette, un ingrédient, ..."
+          aria-placeholder="Rechercher une recette, un ingrédient, etc">
+        <span id="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+      </div>
+    </section>
+  </header>
+  <main class="main" role="main" aria-label="contenu principal de l'accueil de FishEye">
+    <div class="filters">
+      <div class="tags">
+        <div class="ingredients">
+          <div class="category">
+            <p>Ingrédients</p>
+            <span><i class="fa-solid fa-chevron-down"></i></span>
+          </div>
+          <div class="ingredients-list">
+            <div class="label-search">
+              <label for="ingredient"></label>
+              <input type="text" name="ingredient" id="ingredient-input">
+              <span id="search-label-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+              <span id="clear-search-label-icon"><i class="fa-solid fa-xmark"></i></span>
+            </div>
+            <ul class="label-selected">
+              <li class="label-selected-tags">Eau de coco</li>
+            </ul>
+            <ul>
+              <li class="label-tags">Jus de citron</li>
+              <li class="label-tags">Jus de citron</li>
+              <li class="label-tags">Jus de citron</li>
+              <li class="label-tags">Jus de citron</li>
+              <li class="label-tags">Jus de citron</li>
+              <li class="label-tags">Jus de citron</li>
+              <li class="label-tags">Jus de citron</li>
+              <li class="label-tags">Jus de citron</li>
+            </ul>
+          </div>
+        </div>
+        <div class="appareils">
+          <div class="category">
+            <p>Appareils</p>
+            <span><i class="fa-solid fa-chevron-down"></i></span>
+          </div>
+          <div class="ingredients-list">
+            <div class="label-search">
+              <label for="ingredient"></label>
+              <input type="text" name="ingredient" id="ingredient-input">
+              <span id="search-label-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+              <span id="clear-search-label-icon"><i class="fa-solid fa-xmark"></i></span>
+            </div>
+            <ul class="label-selected">
+              <li class="label-selected-tags">Eau de coco</li>
+            </ul>
+            <ul>
+              <li class="label-tags">Jus de citron</li>
+              <li class="label-tags">Jus de citron</li>
+              <li class="label-tags">Jus de citron</li>
+              <li class="label-tags">Jus de citron</li>
+              <li class="label-tags">Jus de citron</li>
+              <li class="label-tags">Jus de citron</li>
+              <li class="label-tags">Jus de citron</li>
+              <li class="label-tags">Jus de citron</li>
+            </ul>
+          </div>
+        </div>
+        <div class="ustensiles">
+          <div class="category">
+            <p>Ustensiles</p>
+            <span><i class="fa-solid fa-chevron-down"></i></span>
+          </div>
+          <div class="ingredients-list">
+            <div class="label-search">
+              <label for="ingredient"></label>
+              <input type="text" name="ingredient" id="ingredient-input">
+              <span id="search-label-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+              <span id="clear-search-label-icon"><i class="fa-solid fa-xmark"></i></span>
+            </div>
+            <ul class="label-selected">
+              <li class="label-selected-tags">Eau de coco</li>
+            </ul>
+            <ul>
+              <li class="label-tags">Jus de citron</li>
+              <li class="label-tags">Jus de citron</li>
+              <li class="label-tags">Jus de citron</li>
+              <li class="label-tags">Jus de citron</li>
+              <li class="label-tags">Jus de citron</li>
+              <li class="label-tags">Jus de citron</li>
+              <li class="label-tags">Jus de citron</li>
+              <li class="label-tags">Jus de citron</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <p class="nb-recettes"><span id="nb-edit-recettes">1500 </span>recettes</p>
+    </div>
+    <section class="recettes-list">
+      <article class="recette">
+        <div class="recette-cover">
+          <img src="./assets/RecipesPhotos/Recette01.jpg" alt="">
+        </div>
+        <div class="content-recette">
+          <h2 class="recette-titre">Limonade de Coco</h2>
+          <h3 class="recette-label">RECETTE</h3>
+          <p class="recette-description">
+            Mettre les glaçons à votre goût dans le blender, Ajouter le lait la crème de coco, le jus de 2 citrons et le
+            sucre ensemble. Mixer jusqu'à obtenir la consistance désirée.
+          </p>
+          <h3 class="recette-label">INGRÉDIENTS</h3>
+          <ul class="recette-ingredients">
+            <li>
+              <h4>Lait de coco</h4>
+              <p>400ml</p>
+            </li>
+            <li>
+              <h4>Lait de coco</h4>
+              <p>400ml</p>
+            </li>
+            <li>
+              <h4>Lait de coco</h4>
+              <p>400ml</p>
+            </li>
+            <li>
+              <h4>Lait de coco</h4>
+              <p>400ml</p>
+            </li>
+            <li>
+              <h4>Lait de coco</h4>
+              <p>400ml</p>
+            </li>
+          </ul>
+        </div>
+      </article>
+      <article class="recette">
+        <div class="recette-cover">
+          <img src="./assets/RecipesPhotos/Recette01.jpg" alt="">
+        </div>
+        <div class="content-recette">
+          <h2 class="recette-titre">Limonade de Coco</h2>
+          <h3 class="recette-label">RECETTE</h3>
+          <p class="recette-description">
+            Mettre les glaçons à votre goût dans le blender, Ajouter le lait la crème de coco, le jus de 2 citrons et le
+            sucre ensemble. Mixer jusqu'à obtenir la consistance désirée.
+          </p>
+          <h3 class="recette-label">INGRÉDIENTS</h3>
+          <ul class="recette-ingredients">
+            <li>
+              <h4>Lait de coco</h4>
+              <p>400ml</p>
+            </li>
+            <li>
+              <h4>Lait de coco</h4>
+              <p>400ml</p>
+            </li>
+            <li>
+              <h4>Lait de coco</h4>
+              <p>400ml</p>
+            </li>
+            <li>
+              <h4>Lait de coco</h4>
+              <p>400ml</p>
+            </li>
+            <li>
+              <h4>Lait de coco</h4>
+              <p>400ml</p>
+            </li>
+          </ul>
+        </div>
+      </article>
+      <article class="recette">
+        <div class="recette-cover">
+          <img src="./assets/RecipesPhotos/Recette01.jpg" alt="">
+        </div>
+        <div class="content-recette">
+          <h2 class="recette-titre">Limonade de Coco</h2>
+          <h3 class="recette-label">RECETTE</h3>
+          <p class="recette-description">
+            Mettre les glaçons à votre goût dans le blender, Ajouter le lait la crème de coco, le jus de 2 citrons et le
+            sucre ensemble. Mixer jusqu'à obtenir la consistance désirée.
+          </p>
+          <h3 class="recette-label">INGRÉDIENTS</h3>
+          <ul class="recette-ingredients">
+            <li>
+              <h4>Lait de coco</h4>
+              <p>400ml</p>
+            </li>
+            <li>
+              <h4>Lait de coco</h4>
+              <p>400ml</p>
+            </li>
+            <li>
+              <h4>Lait de coco</h4>
+              <p>400ml</p>
+            </li>
+            <li>
+              <h4>Lait de coco</h4>
+              <p>400ml</p>
+            </li>
+            <li>
+              <h4>Lait de coco</h4>
+              <p>400ml</p>
+            </li>
+          </ul>
+        </div>
+      </article>
+      <article class="recette">
+        <div class="recette-cover">
+          <img src="./assets/RecipesPhotos/Recette01.jpg" alt="">
+        </div>
+        <div class="content-recette">
+          <h2 class="recette-titre">Limonade de Coco</h2>
+          <h3 class="recette-label">RECETTE</h3>
+          <p class="recette-description">
+            Mettre les glaçons à votre goût dans le blender, Ajouter le lait la crème de coco, le jus de 2 citrons et le
+            sucre ensemble. Mixer jusqu'à obtenir la consistance désirée.
+          </p>
+          <h3 class="recette-label">INGRÉDIENTS</h3>
+          <ul class="recette-ingredients">
+            <li>
+              <h4>Lait de coco</h4>
+              <p>400ml</p>
+            </li>
+            <li>
+              <h4>Lait de coco</h4>
+              <p>400ml</p>
+            </li>
+            <li>
+              <h4>Lait de coco</h4>
+              <p>400ml</p>
+            </li>
+            <li>
+              <h4>Lait de coco</h4>
+              <p>400ml</p>
+            </li>
+            <li>
+              <h4>Lait de coco</h4>
+              <p>400ml</p>
+            </li>
+          </ul>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+
+</html>
