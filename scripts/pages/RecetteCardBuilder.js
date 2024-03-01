@@ -14,6 +14,7 @@ export default class RecetteCardBuilder {
 			const ingredients = element.ingredients;
 			const recetteCard = `
                 <div class="recette-cover">
+                    <div class="timing-recette">${element.time}min</div>
                     <img src="./assets/RecipesPhotos/Recette${element.id < 10 ? '0'+element.id : element.id}.jpg" alt="">
                     </div>
                     <div class="content-recette">

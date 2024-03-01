@@ -286,6 +286,7 @@
 }
 
 .recette {
+    position: relative;
     max-height: 730px;
     max-width: 450px;
     height: 100%;
@@ -296,6 +297,22 @@
     box-shadow: 0px 4px 34px 30px #0000000A;
     margin-bottom: 50px;
     /* margin-left: 50px; */
+}
+
+.timing-recette {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 15px;
+    top: 20px;
+    border-radius: 14px;
+    text-align: center;
+    padding: 15px 35px 15px 35px;
+    background-color: var(--selection);
+    color: black;
+    width: 60px;
+    height: 25px;
 }
 
 .recette-cover {
@@ -406,16 +423,132 @@
 }
 
 @media screen and (max-width:720px){
+
+    .logo {
+        padding: 30px 0;
+        margin: 0 auto;
+        width: 75%;
+    }
+    
+    .logo img {
+        width: 100%;
+    }
+
+    .filters {
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        width: 90dvw;
+    }
+
+    .tags {
+        margin-top: 15px;
+        gap: 15px;
+        width: 100%;
+        flex-wrap: wrap;
+        padding: 0;
+    }
+    
+    .nb-recettes {
+        justify-self: flex-end;
+        font-size: 1.3rem;
+        font-family: 'Anton', sans-serif;
+        width: 100%;
+        text-align: center;
+        margin-top: 25px;
+    }
+
+    .ingredients,
+.appareils,
+.ustensiles {
+    width: 100px;
+    font-size: 0.85rem;
+
+}
+
+
     .recettes-list {
         padding-top: 50px;
         display: grid;
-        grid-template-columns: repeat(1, minmax(380px, 1fr));
+        grid-template-columns: repeat(1, minmax(300px, 1fr));
         grid-template-rows: auto;
-        max-width: 1580px;
-        width: 100%;
+        /* max-width: 1580px; */
+        width: 95dvw;
         place-items: center;
-        margin: auto;
+        margin: 0 auto;
         column-gap: 15px;
         row-gap: 50px;
     }
+
+    .header-content {
+        max-width: 95dvw;
+    }
+
+    .title {
+        font-size: 1.8rem;
+    }
+
+    .searchbar {
+        position: relative;
+        z-index: 1;
+    }
+    
+    #search {
+        width: 80dvw;
+        padding: 25px 30px;
+        margin-top: 15px;
+    }
+    
+    #search-icon {
+        position: absolute;
+        right: 10px;
+        top: 22px;
+        z-index: 1;
+        color: white;
+        background-color: var(--black);
+        padding: 8px 10px;
+        border-radius: 10px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all 0.10s ease-in-out;
+    }
+    
+    #search-icon:hover {
+        background-color: var(--selection);
+        color: var(--black);
+    }
+
+    /* ////////////////////////////////////////  */
+
+.saved-tags {
+    padding: 0 15px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5dvw;
+    margin: 0 auto;
+}
+
+.saved-tag {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    padding: 10px 5px 10px 5px;
+    background-color: var(--selection);
+    width: 120px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.tag-text {
+    font-size: 0.8rem;
+}
+
+.saved-tag:hover .tag-text {
+    font-weight: bold;
+    font-size: 0.76rem;
+    padding-left: -1.2px;
+}
 }
