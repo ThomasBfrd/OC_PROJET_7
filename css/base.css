@@ -30,6 +30,12 @@ body {
     background-color: #EDEDED;
 }
 
+.main {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+}
+
 /* Firefox (uncomment to work in Firefox, although other properties will not work!)  */
 /* .ingredients-list {
   scrollbar-width: thin;
