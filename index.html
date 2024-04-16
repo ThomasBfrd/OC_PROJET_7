@@ -35,85 +35,58 @@
   <main class="main" role="main" aria-label="contenu principal de l'accueil de FishEye">
     <div class="filters">
       <div class="tags">
-        <div class="ingredients">
+        <div class="ingredients tags-list">
           <div class="category">
             <p>Ingrédients</p>
             <span><i class="fa-solid fa-chevron-down"></i></span>
           </div>
-          <div class="ingredients-list">
+          <div class="filters-list">
             <div class="label-search">
-              <label for="ingredient"></label>
-              <input type="text" name="ingredient" id="ingredient-input">
+              <label for="ingredients-input"></label>
+              <input type="text" name="ingredient" id="ingredients-input">
               <span id="search-label-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-              <span id="clear-search-label-icon"><i class="fa-solid fa-xmark"></i></span>
+              <span id="clear-ingredients-search-label-icon"><i class="fa-solid fa-xmark"></i></span>
             </div>
-            <ul class="label-selected">
-              <li class="label-selected-tags">Eau de coco</li>
-            </ul>
-            <ul>
-              <li class="label-tags">Jus de citron</li>
-              <li class="label-tags">Jus de citron</li>
-              <li class="label-tags">Jus de citron</li>
-              <li class="label-tags">Jus de citron</li>
-              <li class="label-tags">Jus de citron</li>
-              <li class="label-tags">Jus de citron</li>
-              <li class="label-tags">Jus de citron</li>
-              <li class="label-tags">Jus de citron</li>
-            </ul>
+            <div class="allLists">
+              <ul class="label-selected hide"></ul>
+              <ul class="filters-tags-list"></ul>
+            </div>
           </div>
         </div>
         <div class="appareils">
-          <div class="category">
+          <div class="category tags-list">
             <p>Appareils</p>
             <span><i class="fa-solid fa-chevron-down"></i></span>
           </div>
-          <div class="ingredients-list">
+          <div class="filters-list">
             <div class="label-search">
-              <label for="ingredient"></label>
-              <input type="text" name="ingredient" id="ingredient-input">
+              <label for="appareils-input"></label>
+              <input type="text" name="appareils" id="appareils-input">
               <span id="search-label-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-              <span id="clear-search-label-icon"><i class="fa-solid fa-xmark"></i></span>
+              <span id="clear-appareils-search-label-icon"><i class="fa-solid fa-xmark"></i></span>
             </div>
-            <ul class="label-selected">
-              <li class="label-selected-tags">Eau de coco</li>
-            </ul>
-            <ul>
-              <li class="label-tags">Jus de citron</li>
-              <li class="label-tags">Jus de citron</li>
-              <li class="label-tags">Jus de citron</li>
-              <li class="label-tags">Jus de citron</li>
-              <li class="label-tags">Jus de citron</li>
-              <li class="label-tags">Jus de citron</li>
-              <li class="label-tags">Jus de citron</li>
-              <li class="label-tags">Jus de citron</li>
-            </ul>
+            <div class="allLists">
+              <ul class="label-selected hide"></ul>
+              <ul class="filters-tags-list"></ul>
+            </div>
           </div>
         </div>
-        <div class="ustensiles">
+        <div class="ustensiles tags-list">
           <div class="category">
             <p>Ustensiles</p>
             <span><i class="fa-solid fa-chevron-down"></i></span>
           </div>
-          <div class="ingredients-list">
+          <div class="filters-list">
             <div class="label-search">
-              <label for="ingredient"></label>
-              <input type="text" name="ingredient" id="ingredient-input">
+              <label for="ustensiles-input"></label>
+              <input type="text" name="ustensiles" id="ustensiles-input">
               <span id="search-label-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-              <span id="clear-search-label-icon"><i class="fa-solid fa-xmark"></i></span>
+              <span id="clear-ustensiles-search-label-icon"><i class="fa-solid fa-xmark"></i></span>
             </div>
-            <ul class="label-selected">
-              <li class="label-selected-tags">Eau de coco</li>
-            </ul>
-            <ul>
-              <li class="label-tags">Jus de citron</li>
-              <li class="label-tags">Jus de citron</li>
-              <li class="label-tags">Jus de citron</li>
-              <li class="label-tags">Jus de citron</li>
-              <li class="label-tags">Jus de citron</li>
-              <li class="label-tags">Jus de citron</li>
-              <li class="label-tags">Jus de citron</li>
-              <li class="label-tags">Jus de citron</li>
-            </ul>
+            <div class="allLists">
+              <ul class="label-selected hide"></ul>
+              <ul class="filters-tags-list"></ul>
+            </div>
           </div>
         </div>
       </div>
@@ -122,7 +95,8 @@
     <div class="saved-tags"></div>
     <section class="recettes-list"></section>
   </main>
-  <script src="./scripts/utils/animations.js"></script>
+  <script type="module" src="./scripts/utils/animations.js"></script>
+  <script src="./scripts/utils/lazyLoader.js"></script>
 </body>
 
 </html>
