@@ -29,4 +29,43 @@ const animationTag = () => {
 	});
 };
 
+export const deleteSelectedTag = () => {
+	const labelSelected = document.querySelectorAll('.label-selected-tags');
+
+	labelSelected.forEach(element => {
+		element.addEventListener('mouseenter', () => {
+			element.classList.add('delete-tag-selected');
+	
+		});
+	
+		element.addEventListener('mouseleave', () => {
+			element.classList.remove('delete-tag-selected');
+	
+		});
+	});
+};
+
+const filtersAnimation = () => {
+	const filtersLists = document.querySelectorAll('.category');
+
+	filtersLists.forEach(filter => {
+		let isOpened = false;
+		const list = filter.nextElementSibling;
+
+		filter.addEventListener('click', () => {
+			if (!isOpened) {
+				isOpened = true;
+				list.style.height = '180px';
+				list.style.overflowY = 'scroll';
+			} else {
+				isOpened = false;
+				list.style.height = '0px';
+				list.style.overflowY = 'hidden';
+			}
+		});
+	});
+};
+
+filtersAnimation();
 animationTag();
+filtersAnimation();
