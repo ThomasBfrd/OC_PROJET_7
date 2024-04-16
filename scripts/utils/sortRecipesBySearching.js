@@ -1,14 +1,20 @@
 import RecetteCardBuilder from '../pages/RecetteCardBuilder.js';
 import { changeCoverPosition } from './changeCoverPosition.js';
 import CardTag from './CardTag.js';
+import FiltersTags from '../pages/FiltersTags.js';
+
+let dataSearchFiltered = [];
+let dataSearchAndLabelFiltered = [];
+let recipesData = [];
 
 export const triRecettes = (data) => {
 	const datas = data;
-	let dataFiltered = [];
-
+	let searchBar = document.querySelector('#search');
+	searchBar.value = '';
 	const dataSearch = datas;
+	recipesData = datas;
 
-	document.querySelector('#search').addEventListener('input', (event) => {
+	searchBar.addEventListener('input', (event) => {
 		if (event.target.value !== null) {
 
 			const searchValue = checkInput(event.target.value);
@@ -18,21 +24,13 @@ export const triRecettes = (data) => {
 
 				searchValueFormated.forEach(element => {
                     
-					dataFiltered = dataSearch.filter(recette => {
-						const titre = recette.name.toLowerCase().split(' ');
-						const ingredients = recette.ingredients.flatMap(ingredient => ingredient.ingredient.toLowerCase().split(' '));
-						const description = recette.description.toLowerCase().split(' ');
-        
-						return ingredients.some(el => el.includes(element)) ||
-                            titre.some(el => el.includes(element)) ||
-                            description.some(el => el.includes(element));
-					});
+					dataSearchFiltered = findInArray(dataSearch, element);
 
 				});
 
-				if (dataFiltered.length > 0) {
-					updateRecipesList(dataFiltered);
-					createTag(dataFiltered[0].ingredients[0].ingredient, dataFiltered);
+				if (dataSearchFiltered.length > 0) {
+					filterRecipes();
+					createTag(dataSearchFiltered[0].ingredients[0].ingredient, dataSearchFiltered);
 				} else {
 					const recettesCount = document.querySelector('#nb-edit-recettes');
 					recettesCount.innerHTML = '0';
@@ -46,56 +44,164 @@ export const triRecettes = (data) => {
 					recettesList.appendChild(emptyList);
 				}
 
-			} else if (event.target.value.length < 3) {
-				updateRecipesList(data);
+			} else {
+				dataSearchFiltered = [];
+				filterRecipes();
 			}
 		}
 	});
 };
 
-const createTag = (data, dataFiltered) => {
-	const searchIcon = document.querySelector('#search-icon');
-	
-	// Vérifiez si l'écouteur d'événement a déjà été ajouté
-	if (!searchIcon.hasListener) {
-		searchIcon.addEventListener('click', () => {
-			new CardTag().createCardTag(data);
-			deleteTag(dataFiltered);
+const filterRecipes = () => {
+	const tags = checkTags();
+
+	if (tags.length > 0) {
+		let filteredRecipes = dataSearchFiltered.length > 0 ? [...dataSearchFiltered] : [...recipesData];
+
+		tags.forEach(tag => {
+			filteredRecipes = findInArray(filteredRecipes, tag);
 		});
-		
-		// Marquez que l'écouteur d'événement a été ajouté
-		searchIcon.hasListener = true;
+
+		dataSearchAndLabelFiltered = filteredRecipes;
+
+		if (dataSearchAndLabelFiltered.length > 0) {
+			console.log(dataSearchAndLabelFiltered);
+			updateRecipesList(dataSearchAndLabelFiltered);
+			new FiltersTags().filterTags(dataSearchAndLabelFiltered);
+			// checkAndClearTagsIfSelected();
+		} else {
+			emptyRecipes();
+		}
+	} else {
+		if (dataSearchFiltered.length > 0) {
+			updateRecipesList(dataSearchFiltered);
+			new FiltersTags().filterTags(dataSearchFiltered);
+			// checkAndClearTagsIfSelected();
+		} else {
+			updateRecipesList(recipesData);
+			new FiltersTags().filterTags(recipesData);
+			// checkAndClearTagsIfSelected();
+		}
+	}
+};
+
+
+const findInArray = (array, element) => {
+	return array.filter(recette => {
+		const titre = recette.name.toLowerCase();
+		const ingredients = recette.ingredients.map(ingredient => ingredient.ingredient.toLowerCase());
+		const description = recette.description.toLowerCase();
+		const ustensils = recette.ustensils.map(ustensil => ustensil.toLowerCase());
+	
+		return ingredients.some(ingredient => ingredient.includes(element)) ||
+				titre.includes(element) ||
+				description.includes(element) || ustensils.includes(element);
+	});
+};
+
+export const filtersTagsCallBack = () => {
+	if (dataSearchAndLabelFiltered.length > 0) {
+		return filterRecipes();
+	} else if (dataSearchFiltered.length > 0) {
+		return filterRecipes();
+
+	} else if (dataSearchAndLabelFiltered.length < 1 && dataSearchFiltered.length < 1) {
+		return filterRecipes();
+	}
+};
+
+
+let lastTextContent = '';
+
+const createTag = (data) => {
+	const searchIcon = document.querySelector('#search-icon');
+    
+	if (lastTextContent !== data) {
+        
+		searchIcon.removeEventListener('click', () => handleSearchIconClick(data));
+        
+		searchIcon.addEventListener('click', () => handleSearchIconClick(data));
+
+		lastTextContent = data;
+	}
+};
+
+const handleSearchIconClick = (data) => {
+	const savedTags = document.querySelectorAll('.saved-tag span');
+	let tagExists = false;
+    
+	savedTags.forEach(tag => {
+		if (tag.textContent === lastTextContent) {
+			tagExists = true;
+			return; 
+		}
+	});
+    
+	if (!tagExists) { 
+		new CardTag().createCardTag(lastTextContent);
+		filterRecipes();
+
+		// new FiltersTags().removeFilterTagAfterMainSearch(lastTextContent);
+		deleteTag(data);
+	} else {
+
+		// new FiltersTags().removeFilterTagAfterMainSearch(lastTextContent);
 	}
 };
 
 
 const updateRecipesList = (recipes) => {
-	const recettesList = document.querySelector('.recettes-list');
-	recettesList.innerHTML = '';
-	new RecetteCardBuilder().displayRecettes(recipes);
-	changeCoverPosition();
+	if (recipes.length > 0) {
+		const recettesList = document.querySelector('.recettes-list');
+		recettesList.innerHTML = '';
+		new RecetteCardBuilder().displayRecettes(recipes);
+		changeCoverPosition();
+	}
 };
 
-function checkInput(input) {
+export const checkInput = (input) => {
 	return input
 		.replace(/&/g, '&amp;')
 		.replace(/</g, '&lt;')
 		.replace(/>/g, '&gt;')
 		.replace(/"/g, '&quot;')
 		.replace(/'/g, '&#039;');
-}
+};
 
 const deleteTag = () => {
 	const deleteTags = document.querySelectorAll('.delete-tag');
 
 	if (deleteTags && deleteTags.length > 0) {
-		console.log('deleted-tag existe !');
     
 		deleteTags.forEach(deleteTag => {
 			deleteTag.addEventListener('click', event => {
 				event.target.parentElement.remove();
-				console.log('ok');
+				filtersTagsCallBack();
 			});
 		});
 	}
+};
+
+export const checkTags = () => {
+
+	const tagsArray = [];
+	const tags = document.querySelectorAll('.tag-text');
+
+	tags.forEach(tag => {
+		tagsArray.push(tag.textContent.toLowerCase());
+	});
+
+
+	return tagsArray;
+};
+
+const emptyRecipes = () => {
+	const recettesCount = document.querySelector('#nb-edit-recettes');
+	recettesCount.innerHTML = '0';
+	const recettesList = document.querySelector('.recettes-list');
+	recettesList.innerHTML = '';
+	const emptyList = document.createElement('p');
+	emptyList.classList.add('empty-list');
+	emptyList.innerHTML = 'Aucune recette trouvée à partir des filtres selectionnés';
+	recettesList.appendChild(emptyList);
 };
