@@ -1,7 +1,7 @@
 import CardTag from '../utils/CardTag.js';
 import { deleteSelectedTag } from '../utils/animations.js';
-// import { filtersTagsCallBack, checkInput } from '../utils/sortRecipesBySearching.js';
-import { filtersTagsCallBack, checkInput } from '../utils/sortRecipesBySearchingAlternative.js';
+import { filtersTagsCallBack, checkInput } from '../utils/sortRecipesBySearching.js';
+// import { filtersTagsCallBack, checkInput } from '../utils/sortRecipesBySearchingAlternative.js';
 import FiltersLabelPattern from './pattern/FiltersLabelPattern.js';
 
 export default class FiltersTags {
