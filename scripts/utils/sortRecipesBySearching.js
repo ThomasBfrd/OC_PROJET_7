@@ -30,7 +30,15 @@ export const triRecettes = (data) => {
 
 				if (dataSearchFiltered.length > 0) {
 					filterRecipes();
-					createTag(dataSearchFiltered[0].ingredients[0].ingredient, dataSearchFiltered);
+					let ingredientFound = dataSearchFiltered[0].ingredients.find(ingredient => 
+						ingredient.ingredient.toLowerCase().includes(searchValueFormated[0])
+					);
+
+					if (ingredientFound) {
+						createTag(ingredientFound.ingredient, dataSearchFiltered);
+					} else {
+						createTag(searchValueFormated[0], dataSearchFiltered);
+					}
 				} else {
 					const recettesCount = document.querySelector('#nb-edit-recettes');
 					recettesCount.innerHTML = '0';
@@ -68,7 +76,6 @@ const filterRecipes = () => {
 			console.log(dataSearchAndLabelFiltered);
 			updateRecipesList(dataSearchAndLabelFiltered);
 			new FiltersTags().filterTags(dataSearchAndLabelFiltered);
-			// checkAndClearTagsIfSelected();
 		} else {
 			emptyRecipes();
 		}
@@ -76,11 +83,9 @@ const filterRecipes = () => {
 		if (dataSearchFiltered.length > 0) {
 			updateRecipesList(dataSearchFiltered);
 			new FiltersTags().filterTags(dataSearchFiltered);
-			// checkAndClearTagsIfSelected();
 		} else {
 			updateRecipesList(recipesData);
 			new FiltersTags().filterTags(recipesData);
-			// checkAndClearTagsIfSelected();
 		}
 	}
 };
@@ -140,12 +145,7 @@ const handleSearchIconClick = (data) => {
 	if (!tagExists) { 
 		new CardTag().createCardTag(lastTextContent);
 		filterRecipes();
-
-		// new FiltersTags().removeFilterTagAfterMainSearch(lastTextContent);
 		deleteTag(data);
-	} else {
-
-		// new FiltersTags().removeFilterTagAfterMainSearch(lastTextContent);
 	}
 };
 
