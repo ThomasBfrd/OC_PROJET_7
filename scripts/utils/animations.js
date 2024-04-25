@@ -1,4 +1,3 @@
-
 const animationTag = () => {
 
 	const tags = document.querySelectorAll('.saved-tag');
@@ -47,20 +46,23 @@ export const deleteSelectedTag = () => {
 
 const filtersAnimation = () => {
 	const filtersLists = document.querySelectorAll('.category');
-
+	
 	filtersLists.forEach(filter => {
 		let isOpened = false;
 		const list = filter.nextElementSibling;
+		const chevron = document.querySelector('.fa-chevron-down');
 
 		filter.addEventListener('click', () => {
 			if (!isOpened) {
 				isOpened = true;
 				list.style.height = '180px';
 				list.style.overflowY = 'scroll';
+				chevron.classList.add('chevron');
 			} else {
 				isOpened = false;
 				list.style.height = '0px';
 				list.style.overflowY = 'hidden';
+				chevron.classList.remove('chevron');
 			}
 		});
 	});
