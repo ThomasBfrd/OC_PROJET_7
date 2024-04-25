@@ -1,6 +1,5 @@
 import { changeCoverPosition } from '../utils/changeCoverPosition.js';
 
-
 export default class RecetteCardBuilder {
 	displayRecettes(data) {
 		const recettes = data;
@@ -39,6 +38,5 @@ export default class RecetteCardBuilder {
 			article.classList.add('recette');
 			changeCoverPosition();
 		});
-		// return originalRecettes;
 	}
 }

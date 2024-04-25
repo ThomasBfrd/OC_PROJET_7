@@ -1,5 +1,3 @@
-
-
 export default class CardTag {
 
 	createCardTag(element) {
@@ -16,6 +14,4 @@ export default class CardTag {
 		tagsSection.appendChild(tag);
 
 	}
-
-
 }

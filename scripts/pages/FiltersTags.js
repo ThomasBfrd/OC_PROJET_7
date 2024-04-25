@@ -1,7 +1,6 @@
 import CardTag from '../utils/CardTag.js';
 import { deleteSelectedTag } from '../utils/animations.js';
 import { filtersTagsCallBack, checkInput } from '../utils/sortRecipesBySearching.js';
-// import { filtersTagsCallBack, checkInput } from '../utils/sortRecipesBySearchingAlternative.js';
 import FiltersLabelPattern from './pattern/FiltersLabelPattern.js';
 
 export default class FiltersTags {
@@ -110,7 +109,6 @@ export default class FiltersTags {
 		if (!tagExists) {
 			new CardTag().createCardTag(this.lastTextContent);
 			this.lastTextContent = '';
-			// this.deleteTag(labelType);
 			filtersTagsCallBack();
 		}
 	};
@@ -154,16 +152,6 @@ export default class FiltersTags {
 		});
 	};
 
-	// removeFilterTagAfterMainSearch = (element) => {
-	// 	const tags = document.querySelectorAll('.label-tags');
-	// 	tags.forEach(tag => {
-	// 		if (tag.textContent === element) {
-	// 			tag.remove();
-	// 		}
-	// 	});
-	// };
-	
-
 	searchFilters = (data, labelType) => {
 		const input = document.querySelector(`#${labelType}-input`);
 		const clearInput = document.querySelector(`#clear-${labelType}-search-label-icon`);
@@ -185,11 +173,11 @@ export default class FiltersTags {
 					this.createFilterTags(data, labelType);
 				}
 			});
-			clearInput.removeEventListener('click', () => {});
+
 			clearInput.addEventListener('click', (event) => {
-				input.value = '';
-				this.checkAndClearTagsDom(false, labelType);
+				this.checkAndClearTagsDom(true, labelType);
 				this.createFilterTags(data, labelType);
+				input.value = '';
 				event.stopPropagation();
 			});
 
@@ -213,11 +201,11 @@ export default class FiltersTags {
 				element.remove();
 			});
 		}
-		// else if (searchingTag && filtersList.length > 0) {
-		// 	filtersList.forEach(element => {
-		// 		element.remove();
-		// 	});
-		// }
+		else if (searchingTag && filtersList.length > 0) {
+			filtersList.forEach(element => {
+				element.remove();
+			});
+		}
 	};
 
 	createFilterTags = (tags, labelType) => {

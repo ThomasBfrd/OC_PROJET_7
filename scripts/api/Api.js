@@ -1,5 +1,3 @@
-
-
 export default class API {
 	async getData() {
 		const url = '../../data/recipes.json';

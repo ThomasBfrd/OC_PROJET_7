@@ -1,7 +1,3 @@
-// setTimeout(() => {
-// 	changeCoverPosition();
-// },  500);
-
 export const changeCoverPosition = () => {
 	document.querySelectorAll('.recette-cover img').forEach(imgElement => {
 		let imgSrc = imgElement.src;

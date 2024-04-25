@@ -6,7 +6,6 @@ window.addEventListener('scroll', function() {
 				var source = img.getAttribute('src');
 				img.src = source;
 				img.setAttribute('data-src-loaded', 'true');
-				// console.log('image chargée', img);
 			}
 		}
 	});
