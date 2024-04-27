@@ -20,13 +20,9 @@ export const triRecettes = (data) => {
 			const searchValue = checkInput(event.target.value);
 
 			if (searchValue.length >=  3) {
-				let searchValueFormated = searchValue.toLowerCase().split(' ');
-
-				searchValueFormated.forEach(element => {
+				let searchValueFormated = searchValue.toLowerCase();
                     
-					dataSearchFiltered = findInArray(dataSearch, element);
-
-				});
+				dataSearchFiltered = findInArray(dataSearch, searchValue);
 
 				if (dataSearchFiltered.length > 0) {
 					filterRecipes();
