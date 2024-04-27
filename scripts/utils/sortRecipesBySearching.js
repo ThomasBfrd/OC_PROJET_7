@@ -22,7 +22,7 @@ export const triRecettes = (data) => {
 			if (searchValue.length >=  3) {
 				let searchValueFormated = searchValue.toLowerCase();
                     
-				dataSearchFiltered = findInArray(dataSearch, searchValue);
+				dataSearchFiltered = findInArray(dataSearch, searchValueFormated);
 
 				if (dataSearchFiltered.length > 0) {
 					filterRecipes();
