@@ -46,7 +46,7 @@
 .category {
     display: flex;
     gap: 10px;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     padding: 10px;
     cursor: pointer;
@@ -184,10 +184,8 @@
     .nb-recettes {
         justify-self: flex-end;
         font-size: 1.3rem;
-        font-family: 'Anton', sans-serif;
         width: 100%;
-        text-align: center;
-        margin-top: 25px;
+        margin-top: 40px;
     }
 
     .category {
@@ -217,15 +215,19 @@
 
 @media screen and (max-width:480px){
 
+    .filters {
+        padding: 15px 0px 15px 0px;
+    }
+
     .tags {
         margin-top: 15px;
-        gap: 15px;
         width: 90dvw;
         padding: 0;
     }
 
     .category {
         padding: 10px 0px;
+        gap: 5px;
     }
 
     .label-search {

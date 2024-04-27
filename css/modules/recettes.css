@@ -104,6 +104,10 @@
     transform: translate(-50%, -50%);
 }
 
+.recette-show-more {
+    display: none;
+}
+
 @media screen and (max-width:720px){
     
     .ingredients,
@@ -130,14 +134,70 @@
 @media screen and (max-width:480px){
 
     .recettes-list {
-        padding-top: 50px;
         display: grid;
-        grid-template-columns: repeat(1, minmax(280px, 1fr));
-        grid-template-rows: auto;
-        width: 95dvw;
+        grid-template-columns: repeat(1, minmax(85%, auto));
+        grid-auto-rows: auto;
         place-items: center;
-        margin: 0 auto;
+        align-items: start;
         column-gap: 15px;
-        row-gap: 50px;
+        row-gap: 20px;
+        position: relative;
+        padding-top: 30px;
+        width: 100dvw;
+        margin: 0 auto;
+    }
+
+    .recette {
+        height: 85%;
+    }
+
+    .recette-show-more {
+        position: absolute;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 10%, rgba(255, 255, 255, 1) 50%, white 100%);
+        height: 80px;
+        bottom: 0px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5em;
+        color: black;
+        cursor: pointer;
+    }
+    .animate-reveal {
+        animation: recette-reveal 0.4s forwards cubic-bezier(.26,.3,0,1.17);
+    }
+
+    .close-animate-reveal {
+        animation: close-recette-reveal 0.3s forwards cubic-bezier(.97,.07,.39,.64);
+    }
+
+    .reduce-arrow-reveal {
+        animation: reduce-reveal-arrow 0.4s forwards cubic-bezier(.26,.3,0,1.17);
+    }
+
+    .show-arrow-reveal {
+        animation: show-reveal-arrow 0.3s forwards cubic-bezier(.97,.07,.39,.64);
+    }
+
+    .recette-titre {
+        padding: 10px 10px;
+    }
+
+    .recette-ingredients {
+        gap: 8px;
+        column-gap: 3dvw;
+
+        & h4 {
+            margin-top: 5px;
+            margin-left: 5px;
+        }
+
+        & p {
+            margin-top: 5px;
+            margin-left: 5px;
+        }
     }
 }
+
