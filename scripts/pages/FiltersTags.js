@@ -71,9 +71,6 @@ export default class FiltersTags {
 	updateSelectedTags = (labelType) => {
 		const selectedTags = document.querySelector(`.${labelType} .label-selected`);
 
-		
-		
-		selectedTags.innerHTML = '';
 		this.selectedArray.forEach(tag => {
 			const newSelectedTag = document.createElement('li');
 			newSelectedTag.innerHTML = tag;
