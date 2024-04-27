@@ -30,6 +30,7 @@ export default class RecetteCardBuilder {
                             <p class="ingredient-quantity">${ingredient.quantity ? ingredient.quantity : '-'} ${ingredient.unit ? ingredient.unit : ''}</p>
                         </li>`).join('')}
                     </ul>
+                    <div class="recette-show-more"><i class="fa-solid fa-arrow-down"></i></div>
                 </div>
                 `;
         
