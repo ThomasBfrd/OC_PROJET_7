@@ -45,43 +45,52 @@ export default class FiltersTags {
 	};
 
 	selectFilterTag = (labelType) => {
+		// const selectedTags = document.querySelector(`.${labelType} .label-selected`);
 		const list = document.querySelector(`.${labelType} .filters-tags-list`).children;
 		const listArray = Array.from(list);
 	
 		listArray.forEach(element => {
-
 			element.removeEventListener('click', () => {});
-
 			element.addEventListener('click', (event) => {
 				const tagContent = element.textContent;
-				this.selectedArray = [...this.selectedArray, tagContent];
-
-				this.updateSelectedTags(labelType);
-				this.updateSaveTags(tagContent, labelType);
-				this.deleteSelectedTag(labelType);
-
-
+				console.log('on va vérifier si le tag a déjà été sélectionné ou non');
+				if (this.selectedArray.length > 0 && this.selectedArray.includes(tagContent)) {
+					console.log('le tag est déjà sélectionné');
+					return;
+				} else {
+					console.log('nouveau tag, donc on lajoute');
+					this.selectedArray.push(tagContent);
+					this.updateSelectedTags(labelType);
+					this.updateSaveTags(tagContent, labelType);
+					this.deleteSelectedTag(labelType);
+					
+					event.stopPropagation();
+				}
 				
-				event.stopPropagation();
-	
 			});
+
+			element.removeEventListener('click', () => {});
 		});
 	};
+	
 
 	updateSelectedTags = (labelType) => {
 		const selectedTags = document.querySelector(`.${labelType} .label-selected`);
+		const ListSelectedTags = Array.from(selectedTags.children);
+
+		const existingTags = ListSelectedTags.map(tag => tag.textContent);
 
 		this.selectedArray.forEach(tag => {
-			const newSelectedTag = document.createElement('li');
-			newSelectedTag.innerHTML = tag;
-			selectedTags.appendChild(newSelectedTag);
-			newSelectedTag.classList.add('label-selected-tags');
-			deleteSelectedTag();
-			
-			console.log(newSelectedTag);
+			if (!existingTags.includes(tag)) {
+				const newSelectedTag = document.createElement('li');
+				newSelectedTag.textContent = tag;
+				selectedTags.appendChild(newSelectedTag);
+				newSelectedTag.classList.add('label-selected-tags');
+				deleteSelectedTag();
+			}
 		});
 
-		if (selectedTags.children.length > 0) {
+		if (this.selectedArray.length > 0) {
 			selectedTags.classList.remove('hide');
 		} else {
 			selectedTags.classList.add('hide');
@@ -123,6 +132,7 @@ export default class FiltersTags {
 						this.selectedArray = this.selectedArray.filter(item => item !== event.target.textContent);
 						this.updateSelectedTags(labelType);
 						savedTag.parentElement.remove();
+						tag.remove();
 						filtersTagsCallBack();
 					}
 				});
@@ -139,6 +149,7 @@ export default class FiltersTags {
 						this.selectedArray = this.selectedArray.filter(item => item !== selectedTag.textContent);
 						this.updateSelectedTags(labelType);
 						console.log(savedTag.target.parentElement.textContent);
+						selectedTag.remove();
 						savedTag.target.parentElement.remove();
 						filtersTagsCallBack();
 					}
