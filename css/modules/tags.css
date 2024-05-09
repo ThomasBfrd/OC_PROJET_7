@@ -1,0 +1,138 @@
+.saved-tags {
+    margin: 15px auto;
+    width: 100%;
+    max-width: 1440px;
+    padding: 10px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 1.5dvw;
+}
+
+.saved-tag {
+    display: flex;
+    align-items: center;
+    padding: 10px 5px 10px 5px;
+    background-color: var(--selection);
+    width: 140px;
+    height: 50px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.tag-tooltip {
+    opacity: 0;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    background-color: rgba(0, 0, 0, .8);
+    color: var(--selection);
+    padding: 5px;
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.tag-tooltip-up {
+    animation: tooltip-up 0.2s 0.5s forwards ease-in-out;
+}
+
+.tag-tooltip-down {
+    animation: tooltip-down 0.2s forwards ease-in-out;
+}
+
+.delete-tag {
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+}
+
+.saved-tag:hover .delete-tag {
+    animation: close-tag 0.40s forwards ease-in-out;
+}
+
+.close-circle {
+    animation : close-circle 0.105s 0.5s forwards ease-in-out;
+}
+
+.tag-text {
+    margin-left: 5%;
+    font-weight: normal;
+    font-size: 1rem;
+    transition: all 0.10s ease-in-out;
+    max-width: 85px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.saved-tag:hover .tag-text {
+    font-weight: bold;
+    font-size: 0.96rem;
+    padding-left: -1.2px;
+}
+
+.label-selected:hover .delete-tag-selected::after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f057";
+    font-weight: bold;
+    position: absolute;
+    right: 20px;
+}
+
+@keyframes tooltip-up {
+    0% {
+        opacity: 0;
+        top: 0;
+    }
+
+    100% {
+        opacity: 1;
+        top: -30px;
+    }
+}
+
+@keyframes tooltip-down {
+    0% {
+        opacity: 1;
+        top: -30px;
+    }
+
+    100% {
+        opacity: 0;
+        top: 0;
+    }
+}
+
+@media screen and (max-width:720px){
+    .saved-tags {
+        padding: 0 15px;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5dvw;
+        margin: 0 auto;
+    }
+    
+    .saved-tag {
+        display: flex;
+        align-items: center;
+        padding: 10px 5px 10px 5px;
+        background-color: var(--selection);
+        width: 120px;
+        height: 50px;
+        border-radius: 10px;
+    }
+    
+    .tag-text {
+        font-size: 0.8rem;
+    }
+    
+    .saved-tag:hover .tag-text {
+        font-weight: bold;
+        font-size: 0.76rem;
+        padding-left: -1.2px;
+    }
+}
