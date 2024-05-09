@@ -13,15 +13,15 @@ export const triRecettes = (data) => {
 	searchBar.value = '';
 	const dataSearch = datas;
 	recipesData = datas;
-
+	
 	searchBar.addEventListener('input', (event) => {
 		if (event.target.value !== null) {
-
+			
 			const searchValue = checkInput(event.target.value);
-
+			
 			if (searchValue.length >=  3) {
 				let searchValueFormated = searchValue.toLowerCase();
-                    
+				
 				dataSearchFiltered = findInArray(dataSearch, searchValueFormated);
 				
 				if (dataSearchFiltered.length > 0) {
@@ -29,13 +29,13 @@ export const triRecettes = (data) => {
 					let ingredientFound = dataSearchFiltered[0].ingredients.find(ingredient => 
 						ingredient.ingredient.toLowerCase().includes(searchValueFormated)
 					);
-
+					
 					if (ingredientFound) {
 						createTag(ingredientFound.ingredient, dataSearchFiltered);
 					}
 				} else {
 					const recettesCount = document.querySelector('#nb-edit-recettes');
-					recettesCount.innerHTML = '0';
+					recettesCount.textContent = '0 recettes';
 					const recettesList = document.querySelector('.recettes-list');
 					recettesList.innerHTML = '';
 					const emptyList = document.createElement('p');
@@ -190,7 +190,7 @@ export const checkTags = () => {
 
 const emptyRecipes = () => {
 	const recettesCount = document.querySelector('#nb-edit-recettes');
-	recettesCount.innerHTML = '0';
+	recettesCount.innerHTML = '0 recettes';
 	const recettesList = document.querySelector('.recettes-list');
 	recettesList.innerHTML = '';
 	const emptyList = document.createElement('p');

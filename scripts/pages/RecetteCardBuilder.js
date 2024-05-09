@@ -7,7 +7,7 @@ export default class RecetteCardBuilder {
 		recettes.map(element => {
 			nbRecettes.push(element);
 			const recettesCount = document.querySelector('#nb-edit-recettes');
-			recettesCount.innerHTML = nbRecettes.length;
+			recettesCount.textContent = `${nbRecettes.length} recette${nbRecettes.length > 1 ? 's' : ''}`;
 			const recettesSection = document.querySelector('.recettes-list');
 			const article = document.createElement('article');
 			const ingredients = element.ingredients;
