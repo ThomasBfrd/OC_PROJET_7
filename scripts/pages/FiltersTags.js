@@ -75,21 +75,28 @@ export default class FiltersTags {
 	};
 
 	updateSelectedTags = (labelType) => {
+		const list = document.querySelector(`.${labelType} .filters-tags-list`).children;
+		const listArray = Array.from(list);
 		const selectedTags = document.querySelector(`.${labelType} .label-selected`);
 		const listSelectedTags = Array.from(selectedTags.children);
 		const existingTags = listSelectedTags.map(tag => tag.textContent);
-
+  
 		for (let i = 0; i < selectedArray.length; i++) {
-
-			if (existingTags.indexOf(selectedArray[i]) == -1) {
-				const newSelectedTag = document.createElement('li');
-				newSelectedTag.innerHTML = selectedArray[i];
-				selectedTags.appendChild(newSelectedTag);
-				newSelectedTag.classList.add('label-selected-tags');
-				deleteSelectedTag();
+			const tag = selectedArray[i];
+			if (existingTags.indexOf(tag) == -1) {
+				for (let j = 0; j < listArray.length; j++) {
+					const tagFromList = listArray[j];
+					if (tagFromList.textContent === tag) {
+						const newSelectedTag = document.createElement('li');
+						newSelectedTag.textContent = tag;
+						selectedTags.appendChild(newSelectedTag);
+						newSelectedTag.classList.add('label-selected-tags');
+						deleteSelectedTag();
+					}
+				}
 			}
 		}
-
+	
 		if (selectedArray.length > 0) {
 			selectedTags.classList.remove('hide');
 		} else {
