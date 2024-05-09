@@ -70,6 +70,28 @@ const filtersAnimation = () => {
 	});
 };
 
+export const savedTagTooltip = () => {
+	const savedTags = document.querySelectorAll('.saved-tag');
+
+	savedTags.forEach(element => {
+		const tooltip = element.querySelector('.tag-tooltip');
+
+		if (element.children[0].textContent.length > 10) {
+			element.addEventListener('mouseenter', (event) => {
+				tooltip.classList.remove('tag-tooltip-down');
+				tooltip.classList.add('tag-tooltip-up');
+				event.stopPropagation();
+			});
+	
+			element.addEventListener('mouseleave', (event) => {
+				tooltip.classList.remove('tag-tooltip-up');
+				tooltip.classList.add('tag-tooltip-down');
+				event.stopPropagation();
+			});
+		}
+	});
+};
+
 filtersAnimation();
 animationTag();
 filtersAnimation();
