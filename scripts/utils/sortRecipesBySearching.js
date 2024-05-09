@@ -40,7 +40,7 @@ export const triRecettes = (data) => {
 					}
 				} else {
 					const recettesCount = document.querySelector('#nb-edit-recettes');
-					recettesCount.innerHTML = '0';
+					recettesCount.textContent = '0 recettes';
 					const recettesList = document.querySelector('.recettes-list');
 					recettesList.innerHTML = '';
 					const emptyList = document.createElement('p');
@@ -219,7 +219,7 @@ export const checkTags = () => {
 
 const emptyRecipes = () => {
 	const recettesCount = document.querySelector('#nb-edit-recettes');
-	recettesCount.innerHTML = '0';
+	recettesCount.textContent = '0 recettes';
 	const recettesList = document.querySelector('.recettes-list');
 	recettesList.innerHTML = '';
 	const emptyList = document.createElement('p');
