@@ -3,6 +3,8 @@ import { deleteSelectedTag } from '../utils/animations.js';
 import { filtersTagsCallBack, checkInput } from '../utils/sortRecipesBySearching.js';
 import FiltersLabelPattern from './pattern/FiltersLabelPattern.js';
 
+let selectedArray = [];
+
 export default class FiltersTags {
 
 	constructor() {
@@ -11,7 +13,6 @@ export default class FiltersTags {
 		this.ingredientsList = [];
 		this.ustensilesList = [];
 		this.appareilsList = [];
-		this.selectedArray = [];
 	}
 
 	filterTags = (data) => {
@@ -45,28 +46,23 @@ export default class FiltersTags {
 	};
 
 	selectFilterTag = (labelType) => {
-		// const selectedTags = document.querySelector(`.${labelType} .label-selected`);
 		const list = document.querySelector(`.${labelType} .filters-tags-list`).children;
 		const listArray = Array.from(list);
 	
 		listArray.forEach(element => {
-			element.removeEventListener('click', () => {});
 			element.addEventListener('click', (event) => {
-				const tagContent = element.textContent;
-				console.log('on va vérifier si le tag a déjà été sélectionné ou non');
-				if (this.selectedArray.length > 0 && this.selectedArray.includes(tagContent)) {
-					console.log('le tag est déjà sélectionné');
+				let tagContent = element.textContent;
+				if (selectedArray.includes(tagContent)) {
 					return;
 				} else {
-					console.log('nouveau tag, donc on lajoute');
-					this.selectedArray.push(tagContent);
+					selectedArray.push(tagContent);
 					this.updateSelectedTags(labelType);
 					this.updateSaveTags(tagContent, labelType);
 					this.deleteSelectedTag(labelType);
-					
-					event.stopPropagation();
+					this.deleteSavedTag(labelType);
 				}
 				
+				event.stopPropagation();
 			});
 
 			element.removeEventListener('click', () => {});
@@ -76,11 +72,11 @@ export default class FiltersTags {
 
 	updateSelectedTags = (labelType) => {
 		const selectedTags = document.querySelector(`.${labelType} .label-selected`);
-		const ListSelectedTags = Array.from(selectedTags.children);
+		const listSelectedTags = Array.from(selectedTags.children);
 
-		const existingTags = ListSelectedTags.map(tag => tag.textContent);
+		const existingTags = listSelectedTags.map(tag => tag.textContent);
 
-		this.selectedArray.forEach(tag => {
+		selectedArray.forEach(tag => {
 			if (!existingTags.includes(tag)) {
 				const newSelectedTag = document.createElement('li');
 				newSelectedTag.textContent = tag;
@@ -90,7 +86,7 @@ export default class FiltersTags {
 			}
 		});
 
-		if (this.selectedArray.length > 0) {
+		if (selectedArray.length > 0) {
 			selectedTags.classList.remove('hide');
 		} else {
 			selectedTags.classList.add('hide');
@@ -121,45 +117,50 @@ export default class FiltersTags {
 
 	deleteSelectedTag = (labelType) => {
 		const deleteSelectedTagBtn = document.querySelectorAll(`.${labelType} .label-selected-tags`);
-		const deleteSavedTagBtn = document.querySelectorAll('.delete-tag');
-	
 		deleteSelectedTagBtn.forEach(tag => {
-
-			tag.addEventListener('click', event => {
-
-				deleteSavedTagBtn.forEach(savedTag => {
-					if (savedTag.previousElementSibling.textContent === event.target.textContent) {
-						this.selectedArray = this.selectedArray.filter(item => item !== event.target.textContent);
-						this.updateSelectedTags(labelType);
-						savedTag.parentElement.remove();
-						tag.remove();
-						filtersTagsCallBack();
-					}
-				});
-				event.stopPropagation();
+			tag.addEventListener('click', (event) => {
+				this.deleteSelectedTagAndSavedTag(event.target.textContent, labelType);
+				tag.remove();
+				this.updateSelectedTags(labelType);
+				filtersTagsCallBack();
 			});
-		});
-
-		deleteSavedTagBtn.forEach(tag => {
-			tag.addEventListener('click', savedTag => {
-				console.log('saved tag cliqué', savedTag);
-				deleteSelectedTagBtn.forEach(selectedTag => {
-					if (selectedTag.textContent === savedTag.target.previousElementSibling.textContent) {
-						console.log('tags trouvés', (selectedTag.textContent + savedTag.target.previousElementSibling.textContent));
-						this.selectedArray = this.selectedArray.filter(item => item !== selectedTag.textContent);
-						this.updateSelectedTags(labelType);
-						console.log(savedTag.target.parentElement.textContent);
-						selectedTag.remove();
-						savedTag.target.parentElement.remove();
-						filtersTagsCallBack();
-					}
-				});
-
-				savedTag.stopPropagation();
-			});
+			tag.removeEventListener('click', () => {});
 		});
 	};
-
+	
+	deleteSavedTag = (labelType) => {
+		const deleteSavedTagBtn = document.querySelectorAll('.delete-tag');
+		deleteSavedTagBtn.forEach(tag => {
+			tag.addEventListener('click', (event) => {
+				this.deleteSavedTagAndSelectedTag(labelType, event.target.previousElementSibling.textContent);
+				event.target.parentElement.remove();
+				this.updateSelectedTags(labelType);
+				filtersTagsCallBack();
+			});
+			tag.removeEventListener('click', () => {});
+		});
+	};
+	
+	deleteSelectedTagAndSavedTag = (tagText) => {
+		const deleteSavedTagBtn = document.querySelectorAll('.delete-tag');
+		deleteSavedTagBtn.forEach(savedTag => {
+			if (savedTag.previousElementSibling.textContent === tagText) {
+				selectedArray = selectedArray.filter(item => item !== tagText);
+				savedTag.parentElement.remove();
+			}
+		});
+	};
+	
+	deleteSavedTagAndSelectedTag = (labelType, tagText) => {
+		const deleteSelectedTagBtn = document.querySelectorAll(`.${labelType} .label-selected-tags`);
+		deleteSelectedTagBtn.forEach(selectedTag => {
+			if (selectedTag.textContent === tagText) {
+				selectedArray = selectedArray.filter(item => item !== tagText);
+				selectedTag.remove();
+			}
+		});
+	};
+	
 	searchFilters = (data, labelType) => {
 		const input = document.querySelector(`#${labelType}-input`);
 		const clearInput = document.querySelector(`#clear-${labelType}-search-label-icon`);
