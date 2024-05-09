@@ -1,0 +1,145 @@
+.header {
+    position: relative;
+    width: 100%;
+    height: 700px;
+    background-image: url('../../assets/header-bg.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.header::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+    z-index: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.logo {
+    padding: 50px;
+    z-index: 2;
+}
+
+.logo img {
+    cursor: pointer;
+}
+
+.header-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 75dvw;
+    margin: 100px auto;
+    z-index: 1;
+}
+
+.title {
+    font-family: 'Anton', sans-serif;
+    width: 90%;
+    font-size: 44px;
+    text-wrap: balance;
+    color: var(--selection);
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-align: center;
+    margin-bottom: 30px;
+    z-index: 1;
+}
+
+.searchbar {
+    position: relative;
+    z-index: 1;
+}
+
+#search {
+    width: 50dvw;
+    padding: 25px 30px;
+    border-radius: 10px;
+    z-index: 1;
+    border-style: none;
+}
+
+#search-icon {
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    z-index: 1;
+    color: white;
+    background-color: var(--black);
+    padding: 8px 10px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.10s ease-in-out;
+}
+
+#search-icon:hover {
+    background-color: var(--selection);
+    color: var(--black);
+}
+
+@media screen and (max-width:720px){
+    .logo {
+        padding: 30px 0;
+        margin: 0 auto;
+        width: 75%;
+    }
+    
+    .logo img {
+        width: 100%;
+    }
+
+    .header-content {
+        max-width: 95dvw;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .searchbar {
+        position: relative;
+        z-index: 1;
+    }
+    
+    #search {
+        width: 80dvw;
+        padding: 25px 30px;
+        margin-top: 15px;
+        white-space: nowrap;
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+    }
+
+    #search::placeholder {
+        width: 85%;
+    }
+    
+    #search-icon {
+        position: absolute;
+        right: 10px;
+        top: 22px;
+        z-index: 1;
+        color: white;
+        background-color: var(--black);
+        padding: 8px 10px;
+        border-radius: 10px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all 0.10s ease-in-out;
+    }
+    
+    #search-icon:hover {
+        background-color: var(--selection);
+        color: var(--black);
+    }
+
+}
