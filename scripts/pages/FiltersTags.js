@@ -71,6 +71,8 @@ export default class FiltersTags {
 	
 
 	updateSelectedTags = (labelType) => {
+		const list = document.querySelector(`.${labelType} .filters-tags-list`).children;
+		const listArray = Array.from(list);
 		const selectedTags = document.querySelector(`.${labelType} .label-selected`);
 		const listSelectedTags = Array.from(selectedTags.children);
 
@@ -78,11 +80,15 @@ export default class FiltersTags {
 
 		selectedArray.forEach(tag => {
 			if (!existingTags.includes(tag)) {
-				const newSelectedTag = document.createElement('li');
-				newSelectedTag.textContent = tag;
-				selectedTags.appendChild(newSelectedTag);
-				newSelectedTag.classList.add('label-selected-tags');
-				deleteSelectedTag();
+				listArray.forEach(tagFromList => {
+					if (tagFromList.textContent === tag) {
+						const newSelectedTag = document.createElement('li');
+						newSelectedTag.textContent = tag;
+						selectedTags.appendChild(newSelectedTag);
+						newSelectedTag.classList.add('label-selected-tags');
+						deleteSelectedTag();
+					}
+				});
 			}
 		});
 
