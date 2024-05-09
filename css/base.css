@@ -4,7 +4,6 @@
 @import './modules/dropdowns.css';
 @import './modules/tags.css';
 @import './modules/recettes.css';
-@import './animations/animations.css';
 
 :root {
     --black: #0f0f0f;
@@ -36,7 +35,7 @@ body {
 }
 
 .main {
-  max-width: 1440px;
+  /* max-width: 1440px; */
   width: 100%;
   margin: 0 auto;
 }

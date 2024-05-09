@@ -43,7 +43,7 @@
 
 .title {
     font-family: 'Anton', sans-serif;
-    width: 100%;
+    width: 90%;
     font-size: 44px;
     text-wrap: balance;
     color: var(--selection);

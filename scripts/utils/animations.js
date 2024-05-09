@@ -70,39 +70,6 @@ const filtersAnimation = () => {
 	});
 };
 
-// Seulement pour smartphones
-export const onRevealRecipes = () => {
-	const recipes = document.querySelectorAll('.recette');
-	let isOpened = false;
-
-	recipes.forEach((recipe) => {
-		recipe.addEventListener('click', (event) => {
-			const showMore = recipe.querySelector('.recette-show-more');
-			const arrow = recipe.querySelector('.fa-arrow-down');
-			if (!isOpened) {
-				recipe.classList.add('animate-reveal');
-				showMore.classList.add('reduce-arrow-reveal');
-				arrow.classList.add('reduce-arrow-reveal');
-				recipe.classList.remove('close-animate-reveal');
-				showMore.classList.remove('show-arrow-reveal');
-				arrow.classList.remove('show-arrow-reveal');
-				isOpened = true;
-			} else {
-				recipe.classList.add('close-animate-reveal');
-				showMore.classList.add('show-arrow-reveal');
-				arrow.classList.add('show-arrow-reveal');
-				recipe.classList.remove('animate-reveal');
-				showMore.classList.remove('reduce-arrow-reveal');
-				arrow.classList.remove('reduce-arrow-reveal');
-				isOpened = false;
-			}
-
-			event.stopPropagation();
-		});
-	});
-};
-
-
 filtersAnimation();
 animationTag();
 filtersAnimation();
