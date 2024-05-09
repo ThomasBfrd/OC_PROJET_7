@@ -21,14 +21,19 @@ export const triRecettes = (data) => {
 
 			if (searchValue.length >=  3) {
 				let searchValueFormated = searchValue.toLowerCase();
-                    
+
 				dataSearchFiltered = findInArray(dataSearch, searchValueFormated);
-				
+
 				if (dataSearchFiltered.length > 0) {
 					filterRecipes();
-					let ingredientFound = dataSearchFiltered[0].ingredients.find(ingredient => 
-						ingredient.ingredient.toLowerCase().includes(searchValueFormated)
-					);
+					let ingredientFound = '';
+
+					for (let i = 0; i < dataSearchFiltered[0].ingredients.length; i++) {
+						if (dataSearchFiltered[0].ingredients[i].ingredient.toLowerCase().indexOf(searchValueFormated) !== -1) {
+							ingredientFound = dataSearchFiltered[0].ingredients[i];
+							i = dataSearchFiltered[0].ingredients.length - 1;
+						}
+					}
 
 					if (ingredientFound) {
 						createTag(ingredientFound.ingredient, dataSearchFiltered);
@@ -60,9 +65,9 @@ const filterRecipes = () => {
 	if (tags.length > 0) {
 		let filteredRecipes = dataSearchFiltered.length > 0 ? [...dataSearchFiltered] : [...recipesData];
 
-		tags.forEach(tag => {
-			filteredRecipes = findInArray(filteredRecipes, tag);
-		});
+		for(let i = 0; i < tags.length; i++) {
+			filteredRecipes = findInArray(filteredRecipes, tags[i]);
+		}
 
 		dataSearchAndLabelFiltered = filteredRecipes;
 
@@ -85,17 +90,42 @@ const filterRecipes = () => {
 
 
 const findInArray = (array, element) => {
-	return array.filter(recette => {
-		const titre = recette.name.toLowerCase();
-		const ingredients = recette.ingredients.map(ingredient => ingredient.ingredient.toLowerCase());
+	const result = [];
+	for (let i = 0; i < array.length; i++) {
+		const recette = array[i];
+		const name = recette.name.toLowerCase();
 		const description = recette.description.toLowerCase();
-		const ustensils = recette.ustensils.map(ustensil => ustensil.toLowerCase());
-	
-		return ingredients.some(ingredient => ingredient.includes(element)) ||
-				titre.includes(element) ||
-				description.includes(element) || ustensils.includes(element);
-	});
+		let foundInIngredients = false;
+		let foundInUstensils = false;
+
+		// On vérifie les ingrédients
+		for (let j = 0; j < recette.ingredients.length; j++) {
+			const ingredient = recette.ingredients[j].ingredient.toLowerCase();
+			if (ingredient.indexOf(element) !== -1) {
+				foundInIngredients = true;
+				j = recette.ingredients.length - 1;
+			}
+			
+		}
+
+		// Vérification des ustensiles
+		for (let k = 0; k < recette.ustensils.length; k++) {
+			const ustensil = recette.ustensils[k].toLowerCase();
+			if (ustensil.indexOf(element) !== -1) {
+				foundInUstensils = true;
+				k = recette.ustensils.length - 1;
+			}
+			
+		}
+
+		// Ajout de la recette au résultat si l'élément est trouvé dans les ingrédients ou les ustensiles
+		if (foundInIngredients || foundInUstensils || name.indexOf(element) !== -1 || description.indexOf(element) !== -1) {
+			result.push(recette);
+		}
+	}
+	return result;
 };
+
 
 export const filtersTagsCallBack = () => {
 	if (dataSearchAndLabelFiltered.length > 0) {
@@ -127,13 +157,13 @@ const createTag = (data) => {
 const handleSearchIconClick = (data) => {
 	const savedTags = document.querySelectorAll('.saved-tag span');
 	let tagExists = false;
-    
-	savedTags.forEach(tag => {
-		if (tag.textContent === lastTextContent) {
+
+	for(let i = 0; i < savedTags.length; i++) {
+		if (savedTags[i].textContent === lastTextContent) {
 			tagExists = true;
-			return; 
+			return;
 		}
-	});
+	}
     
 	if (!tagExists) { 
 		new CardTag().createCardTag(lastTextContent);
@@ -165,13 +195,12 @@ const deleteTag = () => {
 	const deleteTags = document.querySelectorAll('.delete-tag');
 
 	if (deleteTags && deleteTags.length > 0) {
-    
-		deleteTags.forEach(deleteTag => {
-			deleteTag.addEventListener('click', event => {
+		for(let i = 0; i < deleteTags.length; i++) {
+			deleteTags[i].addEventListener('click', event => {
 				event.target.parentElement.remove();
 				filtersTagsCallBack();
 			});
-		});
+		}
 	}
 };
 
@@ -180,9 +209,9 @@ export const checkTags = () => {
 	const tagsArray = [];
 	const tags = document.querySelectorAll('.tag-text');
 
-	tags.forEach(tag => {
-		tagsArray.push(tag.textContent.toLowerCase());
-	});
+	for(let i = 0; i < tags.length; i++) {
+		tagsArray.push(tags[i].textContent.toLowerCase());
+	}
 
 
 	return tagsArray;

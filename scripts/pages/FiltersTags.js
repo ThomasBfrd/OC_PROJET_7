@@ -27,8 +27,8 @@ export default class FiltersTags {
 		
 		this.tagsData = data;
 
-		tags.forEach(tag => {
-			const tagsTitleText = tag.querySelector('.category p').textContent;
+		for (let i = 0; i < tags.length; i++) {
+			const tagsTitleText = tags[i].querySelector('.category p').textContent;
 
 			if (tagsTitleText === 'Ingrédients') {
 				this.createFilterTags(this.ingredientsList, 'ingredients');
@@ -38,7 +38,7 @@ export default class FiltersTags {
 			else if (tagsTitleText === 'Ustensiles') {
 				this.createFilterTags(this.ustensilesList, 'ustensiles');
 			}
-		});
+		}
 
 		this.searchFilters(ingredientsList, 'ingredients');
 		this.searchFilters(appareilsList, 'appareils');
@@ -48,11 +48,15 @@ export default class FiltersTags {
 	selectFilterTag = (labelType) => {
 		const list = document.querySelector(`.${labelType} .filters-tags-list`).children;
 		const listArray = Array.from(list);
-	
-		listArray.forEach(element => {
-			element.addEventListener('click', (event) => {
-				let tagContent = element.textContent;
-				if (selectedArray.includes(tagContent)) {
+
+		for (let i = 0; i < listArray.length; i++) {
+
+			listArray[i].addEventListener('click', () => {});
+
+			listArray[i].addEventListener('click', (event) => {
+				const tagContent = listArray[i].textContent;
+
+				if (selectedArray.length > 0 && selectedArray.indexOf(tagContent) !== -1) {
 					return;
 				} else {
 					selectedArray.push(tagContent);
@@ -63,28 +67,28 @@ export default class FiltersTags {
 				}
 				
 				event.stopPropagation();
+	
 			});
 
-			element.removeEventListener('click', () => {});
-		});
+			listArray[i].addEventListener('click', () => {});
+		}
 	};
-	
 
 	updateSelectedTags = (labelType) => {
 		const selectedTags = document.querySelector(`.${labelType} .label-selected`);
 		const listSelectedTags = Array.from(selectedTags.children);
-
 		const existingTags = listSelectedTags.map(tag => tag.textContent);
 
-		selectedArray.forEach(tag => {
-			if (!existingTags.includes(tag)) {
+		for (let i = 0; i < selectedArray.length; i++) {
+
+			if (existingTags.indexOf(selectedArray[i]) == -1) {
 				const newSelectedTag = document.createElement('li');
-				newSelectedTag.textContent = tag;
+				newSelectedTag.innerHTML = selectedArray[i];
 				selectedTags.appendChild(newSelectedTag);
 				newSelectedTag.classList.add('label-selected-tags');
 				deleteSelectedTag();
 			}
-		});
+		}
 
 		if (selectedArray.length > 0) {
 			selectedTags.classList.remove('hide');
@@ -93,20 +97,19 @@ export default class FiltersTags {
 		}
 	};
 
-
 	updateSaveTags = (data) => {
 
 		this.lastTextContent = data;
 
 		const savedTags = document.querySelectorAll('.saved-tag span');
 		let tagExists = false;
-		
-		savedTags.forEach(tag => {
-			if (tag.textContent === this.lastTextContent) {
+
+		for (let i = 0; i < savedTags.length; i++) {
+			if (savedTags[i].textContent === this.lastTextContent) {
 				tagExists = true;
 				return; 
 			}
-		});
+		}
 		
 		if (!tagExists) {
 			new CardTag().createCardTag(this.lastTextContent);
@@ -117,50 +120,54 @@ export default class FiltersTags {
 
 	deleteSelectedTag = (labelType) => {
 		const deleteSelectedTagBtn = document.querySelectorAll(`.${labelType} .label-selected-tags`);
-		deleteSelectedTagBtn.forEach(tag => {
-			tag.addEventListener('click', (event) => {
+
+		for (let i = 0; i < deleteSelectedTagBtn.length; i++) {
+			deleteSelectedTagBtn[i].addEventListener('click', (event) => {
 				this.deleteSelectedTagAndSavedTag(event.target.textContent, labelType);
-				tag.remove();
+				deleteSelectedTagBtn[i].remove();
 				this.updateSelectedTags(labelType);
 				filtersTagsCallBack();
 			});
-			tag.removeEventListener('click', () => {});
-		});
+			deleteSelectedTagBtn[i].removeEventListener('click', () => {});
+		}
 	};
 	
 	deleteSavedTag = (labelType) => {
 		const deleteSavedTagBtn = document.querySelectorAll('.delete-tag');
-		deleteSavedTagBtn.forEach(tag => {
-			tag.addEventListener('click', (event) => {
+		
+		for (let i = 0; i < deleteSavedTagBtn.length; i++) {
+			deleteSavedTagBtn[i].addEventListener('click', (event) => {
 				this.deleteSavedTagAndSelectedTag(labelType, event.target.previousElementSibling.textContent);
 				event.target.parentElement.remove();
 				this.updateSelectedTags(labelType);
 				filtersTagsCallBack();
 			});
-			tag.removeEventListener('click', () => {});
-		});
+			deleteSavedTagBtn[i].removeEventListener('click', () => {});
+		}
 	};
 	
 	deleteSelectedTagAndSavedTag = (tagText) => {
 		const deleteSavedTagBtn = document.querySelectorAll('.delete-tag');
-		deleteSavedTagBtn.forEach(savedTag => {
-			if (savedTag.previousElementSibling.textContent === tagText) {
+
+		for (let i = 0; i < deleteSavedTagBtn.length; i++) {
+			if (deleteSavedTagBtn[i].previousElementSibling.textContent === tagText) {
 				selectedArray = selectedArray.filter(item => item !== tagText);
-				savedTag.parentElement.remove();
+				deleteSavedTagBtn[i].parentElement.remove();
 			}
-		});
+		}
 	};
 	
 	deleteSavedTagAndSelectedTag = (labelType, tagText) => {
 		const deleteSelectedTagBtn = document.querySelectorAll(`.${labelType} .label-selected-tags`);
-		deleteSelectedTagBtn.forEach(selectedTag => {
-			if (selectedTag.textContent === tagText) {
+
+		for (let i = 0; i < selectedArray.length; i++) {
+			if (deleteSelectedTagBtn[i].textContent === tagText) {
 				selectedArray = selectedArray.filter(item => item !== tagText);
-				selectedTag.remove();
+				deleteSelectedTagBtn[i].remove();
 			}
-		});
+		}
 	};
-	
+
 	searchFilters = (data, labelType) => {
 		const input = document.querySelector(`#${labelType}-input`);
 		const clearInput = document.querySelector(`#clear-${labelType}-search-label-icon`);
@@ -182,11 +189,10 @@ export default class FiltersTags {
 					this.createFilterTags(data, labelType);
 				}
 			});
-
 			clearInput.addEventListener('click', (event) => {
+				input.value = '';
 				this.checkAndClearTagsDom(true, labelType);
 				this.createFilterTags(data, labelType);
-				input.value = '';
 				event.stopPropagation();
 			});
 
@@ -201,14 +207,16 @@ export default class FiltersTags {
 
 		
 		if (allfiltersList.length > 0 && !searchingTag) {
-			allfiltersList.forEach(element => {
-				element.remove();
-			});
+
+			for (let i = 0; i < allfiltersList.length; i++) {
+				allfiltersList[i].remove();
+			}
 		}
 		else if (mainSearch.length > 0 && searchingTag) {
-			filtersList.forEach(element => {
-				element.remove();
-			});
+
+			for (let j = 0; j < filtersList.length; j++) {
+				allfiltersList[j].remove();
+			}
 		}
 		else if (searchingTag && filtersList.length > 0) {
 			filtersList.forEach(element => {
@@ -221,19 +229,17 @@ export default class FiltersTags {
 		const list = document.querySelector(`.${labelType} .filters-tags-list`);
 		list.innerHTML = '';
 
-		tags.forEach(tag => {
-
-	
+		for (let i = 0; i < tags.length; i++) {
 			const li = document.createElement('li');
 			const span = document.createElement('span');
-			const tagElement = `${tag}`;
+			const tagElement = `${tags[i]}`;
 
 			span.innerHTML = tagElement;
 			li.classList.add('label-tags');
 			span.classList.add('label-tag-span');
 			li.appendChild(span);
 			list.appendChild(li);
-		});
+		}
 		
 		this.selectFilterTag(labelType);
 
