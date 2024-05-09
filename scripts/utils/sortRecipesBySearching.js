@@ -23,17 +23,15 @@ export const triRecettes = (data) => {
 				let searchValueFormated = searchValue.toLowerCase();
                     
 				dataSearchFiltered = findInArray(dataSearch, searchValueFormated);
-
+				
 				if (dataSearchFiltered.length > 0) {
 					filterRecipes();
 					let ingredientFound = dataSearchFiltered[0].ingredients.find(ingredient => 
-						ingredient.ingredient.toLowerCase().includes(searchValueFormated[0])
+						ingredient.ingredient.toLowerCase().includes(searchValueFormated)
 					);
 
 					if (ingredientFound) {
 						createTag(ingredientFound.ingredient, dataSearchFiltered);
-					} else {
-						createTag(searchValueFormated[0], dataSearchFiltered);
 					}
 				} else {
 					const recettesCount = document.querySelector('#nb-edit-recettes');
@@ -69,7 +67,6 @@ const filterRecipes = () => {
 		dataSearchAndLabelFiltered = filteredRecipes;
 
 		if (dataSearchAndLabelFiltered.length > 0) {
-			console.log(dataSearchAndLabelFiltered);
 			updateRecipesList(dataSearchAndLabelFiltered);
 			new FiltersTags().filterTags(dataSearchAndLabelFiltered);
 		} else {
