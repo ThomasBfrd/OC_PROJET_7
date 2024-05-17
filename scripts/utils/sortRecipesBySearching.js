@@ -41,7 +41,7 @@ export const triRecettes = (data) => {
 					const emptyList = document.createElement('p');
 					emptyList.classList.add('empty-list');
 					const searchValue = event.target.value.length > 10 ? event.target.value.substring(0,10) + '...' : event.target.value;
-					emptyList.innerHTML = `Aucune recette ne contient ${searchValue} dans ses ingrédients.`;
+					emptyRecipes(`Aucune recette ne contient ${searchValue} dans ses ingrédients.`);
                         
 					recettesList.appendChild(emptyList);
 				}
@@ -70,7 +70,7 @@ const filterRecipes = () => {
 			updateRecipesList(dataSearchAndLabelFiltered);
 			new FiltersTags().filterTags(dataSearchAndLabelFiltered);
 		} else {
-			emptyRecipes();
+			emptyRecipes('Aucune recette trouvée à partir des filtres selectionnés');
 		}
 	} else {
 		if (dataSearchFiltered.length > 0) {
@@ -188,13 +188,13 @@ export const checkTags = () => {
 	return tagsArray;
 };
 
-const emptyRecipes = () => {
+const emptyRecipes = (message) => {
 	const recettesCount = document.querySelector('#nb-edit-recettes');
 	recettesCount.innerHTML = '0 recettes';
 	const recettesList = document.querySelector('.recettes-list');
 	recettesList.innerHTML = '';
 	const emptyList = document.createElement('p');
 	emptyList.classList.add('empty-list');
-	emptyList.innerHTML = 'Aucune recette trouvée à partir des filtres selectionnés';
+	emptyList.innerHTML = message;
 	recettesList.appendChild(emptyList);
 };

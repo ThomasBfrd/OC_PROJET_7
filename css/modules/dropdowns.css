@@ -18,11 +18,18 @@
     justify-self: flex-start;
 }
 
+.tag {
+    position: relative;
+
+    z-index: 200;
+}
+
 .chevron {
     animation: chevron-rotate 0.35s forwards cubic-bezier(.26,.3,0,1.17);
 }
 
 .nb-recettes {
+    align-self: flex-start;
     justify-self: flex-end;
     font-size: 1.3rem;
     font-family: 'Anton', sans-serif;
@@ -33,15 +40,21 @@
 .appareils,
 .ustensiles {
     width: 180px;
-    outline-offset: 0.5px;
-    outline: 1.5px solid var(--black);
+    /* outline-offset: 0.5px;
+    outline: 1.5px solid var(--black); */
     border-radius: 7px;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
     font-family: 'Manrope', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
+    position: relative;
+    height: 100%;
+    z-index: 200;
 }
 
 .category {
@@ -61,16 +74,24 @@
 }
 
 .filters-list {
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    border-right: none;
+    border-left: none;
+    border-bottom: none ;
     display: flex;
     flex-direction: column;
     align-self: center;
     justify-content: start;
     list-style: none;
-    width: 100%;
+    width: 101%;
     height: 0px;
     text-align: center;
     overflow-y: scroll;
-    position: relative;
+    position: absolute;
+    bottom: -175px;
+    z-index: 20;
+    background-color: #EDEDED;
     
     & .label-tags {
         width: 100%;
@@ -175,7 +196,7 @@
 
 @media screen and (max-width:720px){
     .filters {
-        flex-direction: column;
+        flex-direction: column-reverse;
         justify-content: center;
         align-items: center;
         width: 85dvw;
@@ -186,7 +207,7 @@
         justify-self: flex-end;
         font-size: 1.3rem;
         width: 100%;
-        margin-top: 40px;
+        margin-top: 20px;
         text-align: center;
     }
 
@@ -197,7 +218,7 @@
     }
 
     .tags {
-        margin-top: 15px;
+        margin-top: 25px;
         gap: 10px;
         row-gap: 5px;
         display: grid;
@@ -219,7 +240,6 @@
     }
 
     .tags {
-        margin-top: 15px;
         width: 90dvw;
         padding: 0;
     }
@@ -245,5 +265,15 @@
             padding: 10px 10px;
             border: solid 1px;
         }
+    }
+}
+
+@keyframes chevron-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(180deg);
     }
 }
