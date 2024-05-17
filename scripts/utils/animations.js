@@ -57,11 +57,17 @@ const filtersAnimation = () => {
 				isOpened = true;
 				list.style.height = '180px';
 				list.style.overflowY = 'scroll';
+				list.style.borderRight = '1px solid black';
+				list.style.borderLeft = '1px solid black';
+				list.style.borderBottom = '1px solid black';
 				chevron.classList.add('chevron');
 			} else {
 				isOpened = false;
 				list.style.height = '0px';
 				list.style.overflowY = 'hidden';
+				list.style.borderRight = 'none';
+				list.style.borderLeft = 'none';
+				list.style.borderBottom = 'none';
 				chevron.classList.remove('chevron');
 			}
 
