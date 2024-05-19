@@ -14,7 +14,7 @@ export default class RecetteCardBuilder {
 			const recetteCard = `
                 <div class="recette-cover">
                     <div class="timing-recette">${element.time}min</div>
-                    <img src="./assets/RecipesPhotos/Recette${element.id < 10 ? '0'+element.id : element.id}.jpg" alt="">
+                    <img src="./assets/RecipesPhotos/Recette${element.id < 10 ? '0'+element.id : element.id}.jpg" alt=${element.name}>
                     </div>
                     <div class="content-recette">
                     <h2 class="recette-titre">${element.name}</h2>
