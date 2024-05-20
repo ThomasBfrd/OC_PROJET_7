@@ -40,9 +40,9 @@ export default class FiltersTags {
 			}
 		}
 
-		this.searchFilters(ingredientsList, 'ingredients');
-		this.searchFilters(appareilsList, 'appareils');
-		this.searchFilters(ustensilesList, 'ustensiles');
+		this.searchFilters(this.ingredientsList, 'ingredients');
+		this.searchFilters(this.appareilsList, 'appareils');
+		this.searchFilters(this.ustensilesList, 'ustensiles');
 	};
 
 	selectFilterTag = (labelType) => {
