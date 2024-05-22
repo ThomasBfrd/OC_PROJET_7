@@ -34,16 +34,8 @@ export const triRecettes = (data) => {
 						createTag(ingredientFound.ingredient);
 					}
 				} else {
-					const recettesCount = document.querySelector('#nb-edit-recettes');
-					recettesCount.textContent = '0 recettes';
-					const recettesList = document.querySelector('.recettes-list');
-					recettesList.innerHTML = '';
-					const emptyList = document.createElement('p');
-					emptyList.classList.add('empty-list');
 					const searchValue = event.target.value.length > 10 ? event.target.value.substring(0,10) + '...' : event.target.value;
 					emptyRecipes(`Aucune recette ne contient ${searchValue} dans ses ingrédients.`);
-                        
-					recettesList.appendChild(emptyList);
 				}
 
 			} else {
