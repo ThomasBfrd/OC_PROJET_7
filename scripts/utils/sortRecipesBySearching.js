@@ -36,7 +36,7 @@ export const triRecettes = (data) => {
 					}
 
 					if (ingredientFound) {
-						createTag(ingredientFound.ingredient, dataSearchFiltered);
+						createTag(ingredientFound.ingredient);
 					}
 				} else {
 					const recettesCount = document.querySelector('#nb-edit-recettes');
